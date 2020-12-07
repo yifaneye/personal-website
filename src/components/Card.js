@@ -1,7 +1,7 @@
 import {Button, ButtonWrapper} from "./Modal";
 import {ExpandLess as LessIcon, ExpandMore as MoreIcon} from "@styled-icons/material-rounded";
 import * as PropTypes from "prop-types";
-import React from "react";
+import React, {useState} from "react";
 import styled, {css} from "styled-components";
 
 const Wrapper = styled.div`
@@ -72,27 +72,33 @@ const ToggleButton = styled(Button)`
 
 export function Card(props) {
 
-  const {title, subtitle, description, website, image} = props.item;
+	const {title, subtitle, description, website, image} = props.item;
 
-  return <Wrapper href={website}>
-    <Link href={website} target="_blank" rel="noopener noreferrer">
-      <Title>{title}</Title>
-    </Link>
-    <Subtitle>{subtitle}</Subtitle>
-    {props.showingMore && <Description>{description}</Description>}
-    {props.showingMore && <Website href={website} target="_blank" rel="noopener noreferrer">{website}</Website>}
-    <ButtonWrapper>
-      <ToggleButton onClick={props.onClickMore}>
-        {props.showingMore ? <LessIcon/> : <MoreIcon/>}
-      </ToggleButton>
-    </ButtonWrapper>
-    <Image src={image} onClick={props.onClickModal}/>
-  </Wrapper>
+	const [isShowingMore, setIsShowingMore] = useState(false);
+
+	function toggleShowMore() {
+		setIsShowingMore(!isShowingMore);
+	}
+
+	return <Wrapper href={website}>
+		<Link href={website} target="_blank" rel="noopener noreferrer">
+			<Title>{title}</Title>
+		</Link>
+		<Subtitle>{subtitle}</Subtitle>
+		{isShowingMore && <Description>{description}</Description>}
+		{isShowingMore && <Website href={website} target="_blank" rel="noopener noreferrer">{website}</Website>}
+		<ButtonWrapper>
+			<ToggleButton onClick={toggleShowMore}>
+				{isShowingMore ? <LessIcon/> : <MoreIcon/>}
+			</ToggleButton>
+		</ButtonWrapper>
+		<Image src={image} onClick={props.onClickModal}/>
+	</Wrapper>
 }
 
 Card.propTypes = {
-  item: PropTypes.any,
-  showingMore: PropTypes.bool,
-  onClickMore: PropTypes.func,
-  onClickModal: PropTypes.func
+	item: PropTypes.any,
+	showingMore: PropTypes.bool,
+	onClickMore: PropTypes.func,
+	onClickModal: PropTypes.func
 };

@@ -5,12 +5,7 @@ import {Card} from "./Card";
 
 export function Item(props) {
 
-	const [isShowingMore, setIsShowingMore] = useState(false);
 	const [isShowingModal, setIsShowingModal] = useState(false);
-
-	function toggleShowMore() {
-		setIsShowingMore(!isShowingMore);
-	}
 
 	function toggleShowModal() {
 		setIsShowingModal(!isShowingModal);
@@ -18,7 +13,7 @@ export function Item(props) {
 
 	return (
 		<>
-			<Card item={props.item} showingMore={isShowingMore} onClickMore={toggleShowMore} onClickModal={toggleShowModal}/>
+			<Card item={props.item} onClickModal={toggleShowModal}/>
 			{isShowingModal && <Modal onClick={toggleShowModal} src={props.item.image}/>}
 		</>
 	)
