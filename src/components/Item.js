@@ -6,7 +6,9 @@ import {ExpandLess as LessIcon} from '@styled-icons/material-rounded/ExpandLess'
 
 const Wrapper = styled.div`
   height: 400px;
-  padding: 10%;
+  max-height: 400px;
+  min-height: 400px;
+  padding: 40px;
   background: white;
   border-radius: 20px;
   overflow: hidden;
@@ -48,16 +50,16 @@ const Description = styled.h4`
 `;
 
 const Website = styled.a`
-  font-size: 10px;
+  font-size: 15px;
   margin: 0 0 10px;
   color: #333;
 `;
 
 const Image = styled.img`
-  width: calc(100% + 25%);
+  width: calc(100% + 40px * 2);
   height: 100%;
   object-fit: cover;
-  margin: 20px -12.5% 0;
+  margin: 20px -40px 0;
   user-select: none;
 `;
 
