@@ -14,8 +14,9 @@
     "react-scripts": "4.0.1",
     "styled-components": "^5.2.1",
     "styled-icons": "^10.22.0",
-    "web-vitals": "^0.2.4"
-  },
+    "web-vitals": "^0.2.4",
+		"@styled-icons/material-rounded": "latest"
+	},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -1,7 +1,8 @@
 import * as PropTypes from "prop-types";
-import React from "react";
+import React, {useState} from "react";
 import styled, {css} from 'styled-components';
-import {MoreHoriz} from '@styled-icons/material/MoreHoriz';
+import {ExpandMore as MoreIcon} from '@styled-icons/material-rounded/ExpandMore';
+import {ExpandLess as LessIcon} from '@styled-icons/material-rounded/ExpandLess';
 
 const Wrapper = styled.div`
   height: 400px;
@@ -20,6 +21,10 @@ const Lines = css`
 	-webkit-box-orient: vertical;
 `;
 
+const Link = styled.a`
+	text-decoration: none;
+`;
+
 const Title = styled.h2`
 	${Lines};
 	-webkit-line-clamp: 1;
@@ -31,9 +36,21 @@ const Title = styled.h2`
 const Subtitle = styled.h3`
   ${Lines};
   -webkit-line-clamp: 2;
-  font-size: 15px;
+  font-size: 20px;
   margin: 0 0 10px;
   color: #666;
+`;
+
+const Description = styled.h4`
+  font-size: 15px;
+  margin: 0 0 10px;
+  color: #333;
+`;
+
+const Website = styled.a`
+  font-size: 10px;
+  margin: 0 0 10px;
+  color: #333;
 `;
 
 const Image = styled.img`
@@ -41,6 +58,7 @@ const Image = styled.img`
   height: 100%;
   object-fit: cover;
   margin: 20px -12.5% 0;
+  user-select: none;
 `;
 
 const Button = styled.div`
@@ -51,18 +69,31 @@ const Button = styled.div`
   right: 20px;
   bottom: 20px;
   background: #eee;
-  color: #aaa;
+  color: #bbb;
+  cursor: pointer;
 `;
 
 export function Item(props) {
 
 	const {title, subtitle, description, website, image} = props.item;
+	const [isShowingMore, setIsShowingMore] = useState(false);
+
+	function toggleShowMore() {
+		setIsShowingMore(!isShowingMore);
+	}
+
 	return (
-		<Wrapper>
-			<Button><MoreHoriz/></Button>
-			<Title>{title}</Title>
+		<Wrapper href={website}>
+			<Link href={website} target="_blank" rel="noopener noreferrer">
+				<Title>{title}</Title>
+			</Link>
 			<Subtitle>{subtitle}</Subtitle>
+			{isShowingMore && <Description>{description}</Description>}
+			{isShowingMore && <Website href={website} target="_blank" rel="noopener noreferrer">{website}</Website>}
 			<Image src={image}/>
+			<Button onClick={toggleShowMore}>
+				{isShowingMore ? <LessIcon/> : <MoreIcon/>}
+			</Button>
 		</Wrapper>
 	)
 }
