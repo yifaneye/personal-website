@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import styled, {css} from 'styled-components';
 import {ExpandMore as MoreIcon} from '@styled-icons/material-rounded/ExpandMore';
 import {ExpandLess as LessIcon} from '@styled-icons/material-rounded/ExpandLess';
+import {MModal} from "./Modal";
 
 const Wrapper = styled.div`
   height: 400px;
@@ -63,7 +64,7 @@ const Image = styled.img`
   user-select: none;
 `;
 
-const Button = styled.div`
+export const Button = styled.div`
 	width: 40px;
   height: 40px;
   border-radius: 20px;
@@ -79,24 +80,32 @@ export function Item(props) {
 
 	const {title, subtitle, description, website, image} = props.item;
 	const [isShowingMore, setIsShowingMore] = useState(false);
+	const [isShowingModal, setIsShowingModal] = useState(false);
 
 	function toggleShowMore() {
 		setIsShowingMore(!isShowingMore);
 	}
 
+	function toggleShowModal() {
+		setIsShowingModal(!isShowingModal);
+	}
+
 	return (
-		<Wrapper href={website}>
-			<Link href={website} target="_blank" rel="noopener noreferrer">
-				<Title>{title}</Title>
-			</Link>
-			<Subtitle>{subtitle}</Subtitle>
-			{isShowingMore && <Description>{description}</Description>}
-			{isShowingMore && <Website href={website} target="_blank" rel="noopener noreferrer">{website}</Website>}
-			<Image src={image}/>
-			<Button onClick={toggleShowMore}>
-				{isShowingMore ? <LessIcon/> : <MoreIcon/>}
-			</Button>
-		</Wrapper>
+		<>
+			<Wrapper href={website}>
+				<Link href={website} target="_blank" rel="noopener noreferrer">
+					<Title>{title}</Title>
+				</Link>
+				<Subtitle>{subtitle}</Subtitle>
+				{isShowingMore && <Description>{description}</Description>}
+				{isShowingMore && <Website href={website} target="_blank" rel="noopener noreferrer">{website}</Website>}
+				<Image src={image} onClick={toggleShowModal}/>
+				<Button onClick={toggleShowMore}>
+					{isShowingMore ? <LessIcon/> : <MoreIcon/>}
+				</Button>
+			</Wrapper>
+			{isShowingModal && <MModal onClick={toggleShowModal} src={image}/>}
+		</>
 	)
 }
 
