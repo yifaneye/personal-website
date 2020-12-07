@@ -2,7 +2,6 @@ import {Close as CloseIcon} from "@styled-icons/material-rounded";
 import * as PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
-import {Button} from "./Item";
 
 const ModalWrapper = styled.div`
 	width: 100vw;
@@ -13,31 +12,55 @@ const ModalWrapper = styled.div`
 	top: 0;
 	background-color: rgba(0, 0, 0, 0.8);
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
 `;
 
-const LargeImage = styled.img`
-	min-width: 60%;
-  max-width: 80%;
-  min-height: 80%;
+const Image = styled.img`
+	min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
   max-height: 100%;
   margin: auto;
   object-fit: contain;
   user-select: none;
 `;
 
-export function MModal(props) {
+export const ButtonWrapper = styled.div`
+  width: 100%;
+	position: relative;
+`;
+
+export const Button = styled.div`
+	width: 4vw;
+  height: 4vw;
+  border-radius: 2vw;
+  right: 2vw;
+  bottom: -6vw;
+  position: absolute;
+  background: #eee;
+  color: #bbb;
+  cursor: pointer;
+  display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
+export function Modal(props) {
 	return <ModalWrapper onClick={props.onClick}>
-		<LargeImage src={props.src}/>
-		<Button onClick={props.onClick}>
-			<CloseIcon/>
-		</Button>
+		<ButtonWrapper>
+			<Button onClick={props.onClick}>
+				<CloseIcon/>
+			</Button>
+		</ButtonWrapper>
+		<Image src={props.src}/>
 	</ModalWrapper>
 }
 
-MModal.propTypes = {
+Modal.propTypes = {
 	onClick: PropTypes.func,
 	src: PropTypes.any
 };

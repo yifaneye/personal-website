@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import styled, {css} from 'styled-components';
 import {ExpandMore as MoreIcon} from '@styled-icons/material-rounded/ExpandMore';
 import {ExpandLess as LessIcon} from '@styled-icons/material-rounded/ExpandLess';
-import {MModal} from "./Modal";
+import {Button, ButtonWrapper, Modal} from "./Modal";
 
 const Wrapper = styled.div`
   height: 400px;
@@ -13,7 +13,6 @@ const Wrapper = styled.div`
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  position: relative;
   box-shadow: 0 0 20px rgba(127, 127, 127, 0.1) !important;
 `;
 
@@ -64,16 +63,12 @@ const Image = styled.img`
   user-select: none;
 `;
 
-export const Button = styled.div`
+const ToggleButton = styled(Button)`
+	top: 0;
+	right: calc(50% - 40px);
 	width: 40px;
   height: 40px;
   border-radius: 20px;
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  background: #eee;
-  color: #bbb;
-  cursor: pointer;
 `;
 
 export function Item(props) {
@@ -99,12 +94,14 @@ export function Item(props) {
 				<Subtitle>{subtitle}</Subtitle>
 				{isShowingMore && <Description>{description}</Description>}
 				{isShowingMore && <Website href={website} target="_blank" rel="noopener noreferrer">{website}</Website>}
+				<ButtonWrapper>
+					<ToggleButton onClick={toggleShowMore}>
+						{isShowingMore ? <LessIcon/> : <MoreIcon/>}
+					</ToggleButton>
+				</ButtonWrapper>
 				<Image src={image} onClick={toggleShowModal}/>
-				<Button onClick={toggleShowMore}>
-					{isShowingMore ? <LessIcon/> : <MoreIcon/>}
-				</Button>
 			</Wrapper>
-			{isShowingModal && <MModal onClick={toggleShowModal} src={image}/>}
+			{isShowingModal && <Modal onClick={toggleShowModal} src={image}/>}
 		</>
 	)
 }
