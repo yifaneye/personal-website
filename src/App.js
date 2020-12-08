@@ -1,8 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import 'grilled';
 import styled from 'styled-components';
 import {Item} from "./components/Item";
-const items = require("./assets/items.json");
 
 const Page = styled.div`
   background: #eee;
@@ -16,6 +15,18 @@ const ItemWrapper = styled.div`
 `;
 
 function App() {
+
+	const [items, setItems] = useState([]);
+
+	useEffect(() => {
+		fetch('/items.json')
+			.then(response => response.json())
+			.then(data => setItems(data));
+		return () => {
+			setItems([]);
+		}
+	}, []);
+
 	return (
 		<Page>
 			<ItemsWrapper className='grid12'>
