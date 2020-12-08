@@ -15,7 +15,7 @@ const ModalWrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	cursor: pointer;
+	cursor: zoom-out;
 `;
 
 const Image = styled.img`

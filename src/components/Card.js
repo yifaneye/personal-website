@@ -60,6 +60,7 @@ const Image = styled.img`
   object-fit: cover;
   margin: 20px -40px 0;
   user-select: none;
+  cursor: zoom-in;
 `;
 
 const ToggleButton = styled(Button)`
