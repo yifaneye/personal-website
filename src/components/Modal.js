@@ -33,12 +33,13 @@ export const ButtonWrapper = styled.div`
 	position: relative;
 `;
 
+const CLOSE_BUTTON_SIZE = 4;
 export const Button = styled.div`
-	width: 4vw;
-  height: 4vw;
-  border-radius: 2vw;
-  right: 2vw;
-  bottom: -6vw;
+	width: ${CLOSE_BUTTON_SIZE}vw;
+  height: ${CLOSE_BUTTON_SIZE}vw;
+  border-radius: ${CLOSE_BUTTON_SIZE / 2}vw;
+  right: ${CLOSE_BUTTON_SIZE / 2}vw;
+  bottom: -${CLOSE_BUTTON_SIZE * 1.5}vw;
   position: absolute;
   background: #eee;
   color: #bbb;

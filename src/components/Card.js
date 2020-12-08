@@ -63,12 +63,13 @@ const Image = styled.img`
   cursor: zoom-in;
 `;
 
+const TOGGLE_BUTTON_SIZE = 40;
 const ToggleButton = styled(Button)`
-	top: 0;
-	right: calc(50% - 40px);
-	width: 40px;
-  height: 40px;
-  border-radius: 20px;
+	width: ${TOGGLE_BUTTON_SIZE}px;
+  height: ${TOGGLE_BUTTON_SIZE}px;
+  border-radius: ${TOGGLE_BUTTON_SIZE / 2}px;
+  right: calc(50% - ${TOGGLE_BUTTON_SIZE / 2}px);
+  bottom: -${TOGGLE_BUTTON_SIZE}px;
 `;
 
 export function Card(props) {
