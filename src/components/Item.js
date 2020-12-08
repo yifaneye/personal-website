@@ -1,5 +1,5 @@
 import * as PropTypes from "prop-types";
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Modal} from "./Modal";
 import {Card} from "./Card";
 
@@ -10,6 +10,20 @@ export function Item(props) {
 	function toggleShowModal() {
 		setIsShowingModal(!isShowingModal);
 	}
+
+	const escapeModal = useCallback((event) => {
+		if (event.keyCode === 27) {
+			setIsShowingModal(false);
+		}
+	}, []);
+
+	useEffect(() => {
+		document.addEventListener("keydown", escapeModal, false);
+
+		return () => {
+			document.removeEventListener("keydown", escapeModal, false);
+		};
+	});
 
 	return (
 		<>
