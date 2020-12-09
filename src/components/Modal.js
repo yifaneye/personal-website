@@ -10,13 +10,33 @@ const ModalWrapper = styled.div`
 	position: fixed;
 	left: 0;
 	top: 0;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.9);
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	justify-content: start;
+	align-items: start;
 	cursor: zoom-out;
 	touch-action: pan-x pinch-zoom;
+`;
+
+const ImagesWrapper = styled.div`
+  width: 100vw;
+	height: 100vh;
+	overflow: auto;
+  user-select: none;
+  display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: start;
+`;
+
+const Images = styled.div`
+  height: 100%;
+  user-select: none;
+  display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: start;
 `;
 
 const Image = styled.img`
@@ -50,6 +70,7 @@ export const Button = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	z-index: 2;
 `;
 
 export function Modal(props) {
@@ -59,7 +80,12 @@ export function Modal(props) {
 				<CloseIcon/>
 			</Button>
 		</ButtonWrapper>
-		<Image src={props.src}/>
+		<ImagesWrapper>
+			<Images style={{transform: `translateX(-100%)`}}>
+				<Image src={props.src}/>
+				<Image src='https://yifanai.s3-ap-southeast-2.amazonaws.com/grilled/grilled.jpg'/>
+			</Images>
+		</ImagesWrapper>
 	</ModalWrapper>
 }
 
