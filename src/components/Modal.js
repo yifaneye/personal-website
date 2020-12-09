@@ -1,6 +1,7 @@
 import {Close as CloseIcon} from "@styled-icons/material-rounded";
 import * as PropTypes from "prop-types";
 import React, {useCallback, useEffect, useState} from "react";
+import {useSwipeable} from "react-swipeable";
 import styled from "styled-components";
 import {Button} from "./Button";
 import {ButtonWrapper} from "./ButtonWrapper";
@@ -92,13 +93,20 @@ export function Modal(props) {
 		};
 	});
 
+	const handlers = useSwipeable({
+		onSwipedLeft: () => updateCurrentImageIndex(+1),
+		onSwipedRight: () => updateCurrentImageIndex(-1),
+		preventDefaultTouchmoveEvent: true,
+		trackMouse: true
+	});
+
 	return <ModalWrapper onClick={props.onClick}>
 		<ButtonWrapper>
 			<CloseButton onClick={props.onClick}>
 				<CloseIcon/>
 			</CloseButton>
 		</ButtonWrapper>
-		<ImagesWrapper>
+		<ImagesWrapper {...handlers}>
 			<Images style={{transform: `translateX(calc(-100% * ${currentImageIndex}))`}}>
 				{props.images.map((image, index) => (
 					<Image src={image} key={index}/>
