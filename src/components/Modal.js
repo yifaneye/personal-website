@@ -73,7 +73,13 @@ export function Modal(props) {
 
 	const maxImageIndex = props.images.length;
 
-	const updateCurrentImageIndex = (change) => setCurrentImageIndex(currentImageIndex => Math.abs((currentImageIndex + change) % maxImageIndex));
+	const updateCurrentImageIndex = (change) => setCurrentImageIndex(currentImageIndex => {
+		if (currentImageIndex + change < 0 || currentImageIndex + change >= maxImageIndex) {
+			// out of range
+			return currentImageIndex;
+		}
+		return Math.abs((currentImageIndex + change) % maxImageIndex)
+	});
 
 	const updateCarousel = useCallback((event) => {
 		if (event.keyCode === 37) {
