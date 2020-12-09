@@ -1,8 +1,9 @@
-import {Button, ButtonWrapper} from "./Modal";
 import {ExpandLess as LessIcon, ExpandMore as MoreIcon} from "@styled-icons/material-rounded";
 import * as PropTypes from "prop-types";
 import React, {useState} from "react";
 import styled, {css} from "styled-components";
+import {Button} from "./Button";
+import {ButtonWrapper} from "./ButtonWrapper";
 
 const Wrapper = styled.div`
   height: 400px;
