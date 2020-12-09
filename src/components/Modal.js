@@ -40,6 +40,9 @@ const Images = styled.div`
 	flex-direction: row;
 	justify-content: start;
 	align-items: start;
+	transition-duration: 0.5s;
+	transition-property: transform;
+	transition-timing-function: ease-in-out;
 `;
 
 const Image = styled.img`
@@ -82,7 +85,6 @@ export function Modal(props) {
 	}, [currentImageIndex]);
 
 	useEffect(() => {
-		document.addEventListener("keydown", updateCarousel, false);
 		document.addEventListener("keydown", updateCarousel, false);
 
 		return () => {
