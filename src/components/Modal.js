@@ -34,12 +34,13 @@ export const ButtonWrapper = styled.div`
 `;
 
 const CLOSE_BUTTON_SIZE = 4;
+const CLOSE_BUTTON_SIZE_MIN = 40;
 export const Button = styled.div`
-	width: ${CLOSE_BUTTON_SIZE}vw;
-  height: ${CLOSE_BUTTON_SIZE}vw;
-  border-radius: ${CLOSE_BUTTON_SIZE / 2}vw;
-  right: ${CLOSE_BUTTON_SIZE / 2}vw;
-  bottom: -${CLOSE_BUTTON_SIZE * 1.5}vw;
+	width: max(${CLOSE_BUTTON_SIZE_MIN}px, ${CLOSE_BUTTON_SIZE}vw);
+  height: max(${CLOSE_BUTTON_SIZE_MIN}px, ${CLOSE_BUTTON_SIZE}vw);
+  border-radius: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
+  right: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
+  bottom: -max(${CLOSE_BUTTON_SIZE_MIN * 1.5}px, ${CLOSE_BUTTON_SIZE * 1.5}vw);
   position: absolute;
   background: #eee;
   color: #bbb;
