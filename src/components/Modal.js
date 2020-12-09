@@ -16,6 +16,7 @@ const ModalWrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	cursor: zoom-out;
+	touch-action: pan-x pinch-zoom;
 `;
 
 const Image = styled.img`
