@@ -1,6 +1,6 @@
 import {Close as CloseIcon} from "@styled-icons/material-rounded";
 import * as PropTypes from "prop-types";
-import React from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import styled from "styled-components";
 import {Button} from "./Button";
 import {ButtonWrapper} from "./ButtonWrapper";
@@ -34,6 +34,7 @@ const ImagesWrapper = styled.div`
 
 const Images = styled.div`
   height: 100%;
+  min-width: 100%;
   user-select: none;
   display: flex;
 	flex-direction: row;
@@ -63,6 +64,32 @@ const CloseButton = styled(Button)`
 `;
 
 export function Modal(props) {
+
+	const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+	const maxImageIndex = props.images.length;
+
+	const updateCurrentImageIndex = (change) => setCurrentImageIndex(currentImageIndex => Math.abs((currentImageIndex + change) % maxImageIndex));
+
+	const updateCarousel = useCallback((event) => {
+		if (event.keyCode === 37) {
+			// left arrow key
+			updateCurrentImageIndex(+1);
+		} else if (event.keyCode === 39) {
+			// right arrow key
+			updateCurrentImageIndex(-1);
+		}
+	}, [currentImageIndex]);
+
+	useEffect(() => {
+		document.addEventListener("keydown", updateCarousel, false);
+		document.addEventListener("keydown", updateCarousel, false);
+
+		return () => {
+			document.removeEventListener("keydown", updateCarousel, false);
+		};
+	});
+
 	return <ModalWrapper onClick={props.onClick}>
 		<ButtonWrapper>
 			<CloseButton onClick={props.onClick}>
@@ -70,9 +97,10 @@ export function Modal(props) {
 			</CloseButton>
 		</ButtonWrapper>
 		<ImagesWrapper>
-			<Images style={{transform: `translateX(-100%)`}}>
-				<Image src={props.src}/>
-				<Image src='https://yifanai.s3-ap-southeast-2.amazonaws.com/grilled/grilled.jpg'/>
+			<Images style={{transform: `translateX(calc(-100% * ${currentImageIndex}))`}}>
+				{props.images.map((image, index) => (
+					<Image src={image} key={index}/>
+				))}
 			</Images>
 		</ImagesWrapper>
 	</ModalWrapper>

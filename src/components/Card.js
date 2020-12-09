@@ -75,7 +75,7 @@ const ToggleButton = styled(Button)`
 
 export function Card(props) {
 
-	const {title, subtitle, description, website, image} = props.item;
+	const {title, subtitle, description, website, images} = props.item;
 
 	const [isShowingMore, setIsShowingMore] = useState(false);
 
@@ -95,7 +95,7 @@ export function Card(props) {
 				{isShowingMore ? <LessIcon/> : <MoreIcon/>}
 			</ToggleButton>
 		</ButtonWrapper>
-		<Image src={image} onClick={props.onClickModal}/>
+		<Image src={images[0]} onClick={props.onClickModal}/>
 	</Wrapper>
 }
 

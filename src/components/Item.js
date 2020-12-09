@@ -28,7 +28,7 @@ export function Item(props) {
 	return (
 		<>
 			<Card item={props.item} onClickModal={toggleShowModal}/>
-			{isShowingModal && <Modal onClick={toggleShowModal} src={props.item.image}/>}
+			{isShowingModal && <Modal onClick={toggleShowModal} images={props.item.images}/>}
 		</>
 	)
 }
