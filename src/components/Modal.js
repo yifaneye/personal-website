@@ -18,8 +18,8 @@ const ModalWrapper = styled.div`
 	flex-direction: column;
 	justify-content: start;
 	align-items: start;
+	touch-action: pinch-zoom;
 	cursor: zoom-out;
-	touch-action: pan-x pinch-zoom;
 `;
 
 const ImagesWrapper = styled.div`
@@ -31,6 +31,7 @@ const ImagesWrapper = styled.div`
 	flex-direction: row;
 	justify-content: start;
 	align-items: start;
+	touch-action: pinch-zoom;
 `;
 
 const Images = styled.div`
@@ -44,16 +45,31 @@ const Images = styled.div`
 	transition-duration: 0.5s;
 	transition-property: transform;
 	transition-timing-function: ease-in-out;
+	touch-action: pinch-zoom;
 `;
 
-const Image = styled.img`
-	min-width: 100%;
-  max-width: 100%;
-  min-height: 100%;
-  max-height: 100%;
+const ImageWrapper = styled.div`
+	height: 100%;
+  min-width: 100%;
   margin: auto;
   object-fit: contain;
   user-select: none;
+  background: transparent;
+  display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: start;
+	touch-action: pinch-zoom;
+`;
+
+const Image = styled.img`
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+  object-fit: contain;
+  user-select: none;
+  touch-action: pinch-zoom;
+  cursor: default;
 `;
 
 const CLOSE_BUTTON_SIZE = 4;
@@ -115,7 +131,9 @@ export function Modal(props) {
 		<ImagesWrapper {...handlers}>
 			<Images style={{transform: `translateX(calc(-100% * ${currentImageIndex}))`}}>
 				{props.images.map((image, index) => (
-					<Image src={image} key={index}/>
+					<ImageWrapper>
+						<Image src={image} key={index} onClick={(e) => {e.stopPropagation()}}/>
+					</ImageWrapper>
 				))}
 			</Images>
 		</ImagesWrapper>
