@@ -100,10 +100,10 @@ export function Modal(props) {
 	const updateCarousel = useCallback((event) => {
 		if (event.keyCode === 37) {
 			// left arrow key
-			updateCurrentImageIndex(+1);
+			updateCurrentImageIndex(-1);
 		} else if (event.keyCode === 39) {
 			// right arrow key
-			updateCurrentImageIndex(-1);
+			updateCurrentImageIndex(+1);
 		}
 	}, [currentImageIndex]);
 
