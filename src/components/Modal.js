@@ -131,8 +131,10 @@ export function Modal(props) {
 		<ImagesWrapper {...handlers}>
 			<Images style={{transform: `translateX(calc(-100% * ${currentImageIndex}))`}}>
 				{props.images.map((image, index) => (
-					<ImageWrapper>
-						<Image src={image} key={index} onClick={(e) => {e.stopPropagation()}}/>
+					<ImageWrapper key={index}>
+						<Image src={image} onClick={(e) => {
+							e.stopPropagation()
+						}}/>
 					</ImageWrapper>
 				))}
 			</Images>
