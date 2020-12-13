@@ -1,4 +1,6 @@
 import {Close as CloseIcon} from "@styled-icons/material-rounded";
+import {KeyboardArrowLeft as LeftIcon} from "@styled-icons/material-rounded";
+import {KeyboardArrowRight as RightIcon} from "@styled-icons/material-rounded";
 import * as PropTypes from "prop-types";
 import React, {useCallback, useEffect, useState} from "react";
 import {useSwipeable} from "react-swipeable";
@@ -83,6 +85,24 @@ const CloseButton = styled(Button)`
 	z-index: 2;
 `;
 
+const SideButton = styled(Button)`
+	--size: max(${CLOSE_BUTTON_SIZE_MIN}px, ${CLOSE_BUTTON_SIZE}vw);
+	width: var(--size);
+  height: var(--size);
+  border-radius: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
+	z-index: 2;
+`;
+
+const LeftButton = styled(SideButton)`
+ 	left: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
+  bottom: calc(50vh - var(--size) / 2);
+`;
+
+const RightButton = styled(SideButton)`
+ 	right: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
+ 	bottom: calc(50vh - var(--size) / 2);
+`;
+
 export function Modal(props) {
 
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -96,6 +116,16 @@ export function Modal(props) {
 		}
 		return Math.abs((currentImageIndex + change) % maxImageIndex)
 	});
+
+	const decreaseCurrentImageIndex = (e) => {
+		updateCurrentImageIndex(-1);
+		e.stopPropagation();
+	};
+
+	const increaseCurrentImageIndex = (e) => {
+		updateCurrentImageIndex(+1);
+		e.stopPropagation();
+	};
 
 	const updateCarousel = useCallback((event) => {
 		if (event.keyCode === 37) {
@@ -128,6 +158,12 @@ export function Modal(props) {
 				<CloseIcon/>
 			</CloseButton>
 		</ButtonWrapper>
+		<LeftButton onClick={(e) => decreaseCurrentImageIndex(e)}>
+			<LeftIcon/>
+		</LeftButton>
+		<RightButton onClick={(e) => increaseCurrentImageIndex(e)}>
+			<RightIcon/>
+		</RightButton>
 		<ImagesWrapper {...handlers}>
 			<Images style={{transform: `translateX(calc(-100% * ${currentImageIndex}))`}}>
 				{props.images.map((image, index) => (
