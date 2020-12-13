@@ -26,7 +26,7 @@ const ModalWrapper = styled.div`
 const ImagesWrapper = styled.div`
   width: 100vw;
 	height: 100vh;
-	overflow: auto;
+	overflow: hidden;
   user-select: none;
   display: flex;
 	flex-direction: row;
