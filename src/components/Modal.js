@@ -6,7 +6,6 @@ import React, {useCallback, useEffect, useState} from "react";
 import {useSwipeable} from "react-swipeable";
 import styled from "styled-components";
 import {Button} from "./Button";
-import {ButtonWrapper} from "./ButtonWrapper";
 
 const ModalWrapper = styled.div`
 	width: 100vw;
@@ -153,11 +152,9 @@ export function Modal(props) {
 	});
 
 	return <ModalWrapper onClick={props.onClick}>
-		<ButtonWrapper>
-			<CloseButton onClick={props.onClick}>
-				<CloseIcon/>
-			</CloseButton>
-		</ButtonWrapper>
+		<CloseButton>
+			<CloseIcon/>
+		</CloseButton>
 		<LeftButton onClick={(e) => decreaseCurrentImageIndex(e)}>
 			<LeftIcon/>
 		</LeftButton>
