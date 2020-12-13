@@ -155,10 +155,10 @@ export function Modal(props) {
 		<CloseButton>
 			<CloseIcon/>
 		</CloseButton>
-		<LeftButton onClick={(e) => decreaseCurrentImageIndex(e)}>
+		<LeftButton disabled={currentImageIndex === 0} onClick={(e) => decreaseCurrentImageIndex(e)}>
 			<LeftIcon/>
 		</LeftButton>
-		<RightButton onClick={(e) => increaseCurrentImageIndex(e)}>
+		<RightButton disabled={currentImageIndex === maxImageIndex - 1} onClick={(e) => increaseCurrentImageIndex(e)}>
 			<RightIcon/>
 		</RightButton>
 		<ImagesWrapper {...handlers}>
