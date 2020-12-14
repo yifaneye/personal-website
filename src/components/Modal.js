@@ -73,33 +73,29 @@ const Image = styled.img`
   cursor: default;
 `;
 
-const CLOSE_BUTTON_SIZE = 4;
-const CLOSE_BUTTON_SIZE_MIN = 40;
-const CloseButton = styled(Button)`
-	width: max(${CLOSE_BUTTON_SIZE_MIN}px, ${CLOSE_BUTTON_SIZE}vw);
-  height: max(${CLOSE_BUTTON_SIZE_MIN}px, ${CLOSE_BUTTON_SIZE}vw);
-  border-radius: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
-  right: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
-  bottom: -max(${CLOSE_BUTTON_SIZE_MIN * 1.5}px, ${CLOSE_BUTTON_SIZE * 1.5}vw);
-	z-index: 2;
-`;
-
-const SideButton = styled(Button)`
-	--size: max(${CLOSE_BUTTON_SIZE_MIN}px, ${CLOSE_BUTTON_SIZE}vw);
+const BUTTON_SIZE_VW = 4;
+const BUTTON_SIZE_MIN_PX = 40;
+const RoundButton = styled(Button)`
+	--size: max(${BUTTON_SIZE_MIN_PX}px, ${BUTTON_SIZE_VW}vw);
 	width: var(--size);
   height: var(--size);
-  border-radius: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
+  border-radius: calc(var(--size) / 2);
 	z-index: 2;
 `;
 
-const LeftButton = styled(SideButton)`
- 	left: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
-  bottom: calc(50vh - var(--size) / 2);
+const CloseButton = styled(RoundButton)`
+	right: calc(var(--size) / 2);
+  top: calc(var(--size) / 2);
 `;
 
-const RightButton = styled(SideButton)`
- 	right: max(${CLOSE_BUTTON_SIZE_MIN / 2}px, ${CLOSE_BUTTON_SIZE / 2}vw);
- 	bottom: calc(50vh - var(--size) / 2);
+const LeftButton = styled(RoundButton)`
+ 	left: calc(var(--size) / 2);
+  top: calc(50vh - var(--size) / 2);
+`;
+
+const RightButton = styled(RoundButton)`
+ 	right: max(${BUTTON_SIZE_MIN_PX / 2}px, ${BUTTON_SIZE_VW / 2}vw);
+ 	top: calc(50vh - var(--size) / 2);
 `;
 
 export function Modal(props) {
