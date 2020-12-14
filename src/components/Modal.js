@@ -114,12 +114,16 @@ export function Modal(props) {
 
 	const decreaseCurrentImageIndex = (e) => {
 		updateCurrentImageIndex(-1);
-		e.stopPropagation();
+		if (e) {
+			e.stopPropagation();
+		}
 	};
 
-	const increaseCurrentImageIndex = (e) => {
+	const increaseCurrentImageIndex = (e = undefined) => {
 		updateCurrentImageIndex(+1);
-		e.stopPropagation();
+		if (e) {
+			e.stopPropagation();
+		}
 	};
 
 	const updateCarousel = useCallback((event) => {
@@ -141,8 +145,8 @@ export function Modal(props) {
 	});
 
 	const handlers = useSwipeable({
-		onSwipedLeft: () => updateCurrentImageIndex(+1),
-		onSwipedRight: () => updateCurrentImageIndex(-1),
+		onSwipedLeft: () => increaseCurrentImageIndex(),
+		onSwipedRight: () => decreaseCurrentImageIndex(),
 		preventDefaultTouchmoveEvent: true,
 		trackMouse: true
 	});
@@ -161,9 +165,7 @@ export function Modal(props) {
 			<Images style={{transform: `translateX(calc(-100% * ${currentImageIndex}))`}}>
 				{props.images.map((image, index) => (
 					<ImageWrapper key={index}>
-						<Image src={image} onClick={(e) => {
-							e.stopPropagation()
-						}}/>
+						<Image src={image} onClick={(e) => e.stopPropagation()}/>
 					</ImageWrapper>
 				))}
 			</Images>
