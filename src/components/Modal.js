@@ -127,11 +127,9 @@ export function Modal(props) {
 	};
 
 	const updateCarousel = useCallback((event) => {
-		if (event.keyCode === 37) {
-			// left arrow key
+		if (event.key === 'ArrowLeft') {
 			updateCurrentImageIndex(-1);
-		} else if (event.keyCode === 39) {
-			// right arrow key
+		} else if (event.key === 'ArrowRight') {
 			updateCurrentImageIndex(+1);
 		}
 	}, [currentImageIndex]);

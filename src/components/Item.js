@@ -12,7 +12,7 @@ export function Item(props) {
 	}
 
 	const escapeModal = useCallback((event) => {
-		if (event.keyCode === 27) {
+		if (event.key === 'Escape') {
 			setIsShowingModal(false);
 		}
 	}, []);
