@@ -2,7 +2,7 @@ import {Close as CloseIcon} from "@styled-icons/material-rounded";
 import {KeyboardArrowLeft as LeftIcon} from "@styled-icons/material-rounded";
 import {KeyboardArrowRight as RightIcon} from "@styled-icons/material-rounded";
 import * as PropTypes from "prop-types";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useSwipeable} from "react-swipeable";
 import styled from "styled-components";
 import {Button} from "./Button";
@@ -101,6 +101,7 @@ const RightButton = styled(RoundButton)`
 export function Modal(props) {
 
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
+	const ImagesRef = useRef(null);
 
 	const maxImageIndex = props.images.length;
 
@@ -109,7 +110,9 @@ export function Modal(props) {
 			// out of range
 			return currentImageIndex;
 		}
-		return Math.abs((currentImageIndex + change) % maxImageIndex)
+		const newCurrentImageIndex = Math.abs((currentImageIndex + change) % maxImageIndex);
+		ImagesRef.current.style.transform = `translateX(calc(-100% * ${newCurrentImageIndex})`;
+		return newCurrentImageIndex;
 	});
 
 	const decreaseCurrentImageIndex = (e) => {
@@ -132,15 +135,16 @@ export function Modal(props) {
 		} else if (event.key === 'ArrowRight') {
 			updateCurrentImageIndex(+1);
 		}
-	}, [currentImageIndex]);
+	}, []);
 
 	useEffect(() => {
+		console.log('render');
 		document.addEventListener("keydown", updateCarousel, false);
 
 		return () => {
 			document.removeEventListener("keydown", updateCarousel, false);
 		};
-	});
+	}, [updateCarousel]);
 
 	const handlers = useSwipeable({
 		onSwipedLeft: () => increaseCurrentImageIndex(),
@@ -160,7 +164,7 @@ export function Modal(props) {
 			<RightIcon/>
 		</RightButton>
 		<ImagesWrapper {...handlers}>
-			<Images style={{transform: `translateX(calc(-100% * ${currentImageIndex}))`}}>
+			<Images ref={ImagesRef}>
 				{props.images.map((image, index) => (
 					<ImageWrapper key={index}>
 						<Image src={image} onClick={(e) => e.stopPropagation()}/>
