@@ -59,8 +59,8 @@ const ImageWrapper = styled.div`
   background: transparent;
   display: flex;
 	flex-direction: row;
-	justify-content: start;
-	align-items: start;
+	justify-content: center;
+	align-items: center;
 	touch-action: pinch-zoom;
 `;
 
@@ -105,6 +105,8 @@ export function Modal(props) {
 	const ImagesRef = useRef(null);
 
 	const maxImageIndex = props.images.length;
+
+	const placeholderImage = `${process.env.PUBLIC_URL}/logo192.png`;
 
 	const updateCurrentImageIndex = (change) => setCurrentImageIndex(currentImageIndex => {
 		if (currentImageIndex + change < 0 || currentImageIndex + change >= maxImageIndex) {
@@ -168,7 +170,12 @@ export function Modal(props) {
 			<Images ref={ImagesRef}>
 				{props.images.map((image, index) => (
 					<ImageWrapper key={index}>
-						<LazyLoadImage src={image} onClick={(e) => e.stopPropagation()} style={Image}/>
+						<LazyLoadImage
+							src={image}
+							placeholderSrc={placeholderImage}
+							effect="blur"
+							onClick={(e) => e.stopPropagation()}
+							style={Image}/>
 					</ImageWrapper>
 				))}
 			</Images>
