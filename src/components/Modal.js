@@ -6,6 +6,7 @@ import React, {useCallback, useEffect, useRef, useState} from "react";
 import {useSwipeable} from "react-swipeable";
 import styled from "styled-components";
 import {Button} from "./Button";
+import {LazyLoadImage} from "react-lazy-load-image-component";
 
 const ModalWrapper = styled.div`
 	width: 100vw;
@@ -63,15 +64,15 @@ const ImageWrapper = styled.div`
 	touch-action: pinch-zoom;
 `;
 
-const Image = styled.img`
-  max-height: 100%;
-  max-width: 100%;
-  margin: auto;
-  object-fit: contain;
-  user-select: none;
-  touch-action: pinch-zoom;
-  cursor: default;
-`;
+const Image = {
+	maxHeight: '100%',
+	maxWidth: '100%',
+	margin: 'auto',
+	objectFit: 'contain',
+	userSelect: 'none',
+	touchAction: 'pinchZoom',
+	cursor: 'default',
+};
 
 const BUTTON_SIZE_VW = 4;
 const BUTTON_SIZE_MIN_PX = 40;
@@ -167,7 +168,7 @@ export function Modal(props) {
 			<Images ref={ImagesRef}>
 				{props.images.map((image, index) => (
 					<ImageWrapper key={index}>
-						<Image src={image} onClick={(e) => e.stopPropagation()}/>
+						<LazyLoadImage src={image} onClick={(e) => e.stopPropagation()} style={Image}/>
 					</ImageWrapper>
 				))}
 			</Images>
