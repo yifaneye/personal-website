@@ -171,7 +171,8 @@ export function Modal(props) {
 				{props.images.map((image, index) => (
 					<ImageWrapper key={index}>
 						<LazyLoadImage
-							src={image}
+							src={image.src}
+							alt={image.alt}
 							placeholderSrc={placeholderImage}
 							effect="blur"
 							onClick={(e) => e.stopPropagation()}

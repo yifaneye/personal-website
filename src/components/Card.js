@@ -95,7 +95,7 @@ export function Card(props) {
 				{isShowingMore ? <LessIcon/> : <MoreIcon/>}
 			</ToggleButton>
 		</ButtonWrapper>
-		<Image src={images[0]} onClick={props.onClickModal}/>
+		<Image src={images[0].src} alt={images[0].alt} onClick={props.onClickModal}/>
 	</Wrapper>
 }
 
